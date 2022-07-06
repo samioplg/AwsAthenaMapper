@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Sam",
+    "amount": 10,
+    "birthDay": "1995-07-22T08:00:00",
+    "families": [
+      "Father",
+      "Mom"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Tom",
+    "amount": 4000000,
+    "birthDay": "2000-01-01T08:00:00",
+    "families": [
+      "Brother",
+      "Mom"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "John",
+    "amount": 14000000,
+    "birthDay": "1964-09-12T08:00:00",
+    "families": [
+      "Wife",
+      "Dog"
+    ]
+  }
+]
