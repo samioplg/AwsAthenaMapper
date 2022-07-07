@@ -1,4 +1,5 @@
-﻿using Amazon.Athena;
+﻿using Amazon;
+using Amazon.Athena;
 using Amazon.Athena.Model;
 using AwsAthenaMapper.InternalUtils;
 using AwsAthenaMapper.Models;
@@ -11,7 +12,7 @@ namespace AwsAthenaMapper
 {
     public class AthenaClient : IAthenaClient
     {
-        private readonly AmazonAthenaClient _client;
+        private readonly IAmazonAthena _client;
 
         private readonly string _queryLocation;
 
@@ -47,6 +48,29 @@ namespace AwsAthenaMapper
             _timeoutSecounds = config.TimeOutSecounds;
         }
 
+        public AthenaClient(IAmazonAthena client, string queryResults3Location, int timeOutSecounds)
+        {
+            if(client == null)
+            {
+                throw new ArgumentException($"{nameof(client)} can't be null ");
+            }
+
+            if (string.IsNullOrWhiteSpace(queryResults3Location))
+            {
+                throw new ArgumentException($"{nameof(queryResults3Location)} can't be null or empty ");
+
+            }
+
+            if (timeOutSecounds <= 0)
+            {
+                throw new ArgumentException("TimeOutSecounds Can't less than zero");
+            }
+
+            _client = client;
+            _queryLocation = queryResults3Location;
+            _timeoutSecounds = timeOutSecounds;
+
+        }
 
         public async Task<T> QueryFirstOrDefaultAsync<T>(string sql, AthenaParameter parameter = null) where T : class, new()
         {
@@ -55,35 +79,7 @@ namespace AwsAthenaMapper
                 sql = parameter.Parameters.Aggregate(sql, (input, map) => input.Replace(map.Key, map.Value));
             }
 
-            var exec = await _client.StartQueryExecutionAsync(new StartQueryExecutionRequest
-            {
-                QueryString = sql,
-                ResultConfiguration = new ResultConfiguration
-                {
-                    OutputLocation = _queryLocation
-                }
-            });
-
-            bool isWaiting = true;
-            DateTime endTime = DateTime.Now.AddSeconds(_timeoutSecounds);
-            while (isWaiting)
-            {
-                if (endTime <= DateTime.Now)
-                {
-                    throw new TimeoutException($"Query was timeout ExecutionId:{exec.QueryExecutionId}");
-                }
-
-                isWaiting = await WaitingQuery(exec.QueryExecutionId);
-
-                if (isWaiting)
-                {
-                    await Task.Delay(SLEEP_MS);
-                }
-            }
-            var result = await _client.GetQueryResultsAsync(new GetQueryResultsRequest
-            {
-                QueryExecutionId = exec.QueryExecutionId
-            });
+            var result = await Query(sql);
 
             var rows = result.ResultSet.Rows;
             var colMap = AthenaConvert.MapColumnsIndexInfo(rows[0].Data, result.ResultSet.ResultSetMetadata.ColumnInfo);
@@ -99,7 +95,16 @@ namespace AwsAthenaMapper
                 sql = parameter.Parameters.Aggregate(sql, (input, map) => input.Replace(map.Key, map.Value));
             }
 
+            var result = await Query(sql);
+            var rows = result.ResultSet.Rows;
+            var colMap = AthenaConvert.MapColumnsIndexInfo(rows[0].Data, result.ResultSet.ResultSetMetadata.ColumnInfo);
+            rows.RemoveAt(0);
 
+            return AthenaConvert.MappingToList<T>(rows, colMap);
+        }
+
+        private async Task<GetQueryResultsResponse> Query(string sql)
+        {
             var exec = await _client.StartQueryExecutionAsync(new StartQueryExecutionRequest
             {
                 QueryString = sql,
@@ -108,6 +113,7 @@ namespace AwsAthenaMapper
                     OutputLocation = _queryLocation
                 }
             });
+
 
             bool isWaiting = true;
 
@@ -127,16 +133,10 @@ namespace AwsAthenaMapper
                 }
             }
 
-            var result = await _client.GetQueryResultsAsync(new GetQueryResultsRequest
+            return await _client.GetQueryResultsAsync(new GetQueryResultsRequest
             {
                 QueryExecutionId = exec.QueryExecutionId
             });
-
-            var rows = result.ResultSet.Rows;
-            var colMap = AthenaConvert.MapColumnsIndexInfo(rows[0].Data, result.ResultSet.ResultSetMetadata.ColumnInfo);
-            rows.RemoveAt(0);
-
-            return AthenaConvert.MappingToList<T>(rows, colMap);
         }
 
         private async Task<bool> WaitingQuery(string requestId)
@@ -146,6 +146,7 @@ namespace AwsAthenaMapper
             {
                 QueryExecutionId = requestId
             });
+
             var state = resp.QueryExecution.Status.State;
 
 
@@ -166,6 +167,11 @@ namespace AwsAthenaMapper
 
             return isWaiting;
 
+        }
+
+        public void Dispose()
+        {
+            _client.Dispose();
         }
     }
 }

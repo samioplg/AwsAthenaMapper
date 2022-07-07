@@ -1,0 +1,245 @@
+{
+  "NextToken": null,
+  "ResultSet": {
+    "ResultSetMetadata": {
+      "ColumnInfo": [
+        {
+          "CaseSensitive": false,
+          "CatalogName": "hive",
+          "Label": "id",
+          "Name": "id",
+          "Nullable": {
+            "Value": "UNKNOWN"
+          },
+          "Precision": 10,
+          "Scale": 0,
+          "SchemaName": "",
+          "TableName": "",
+          "Type": "integer"
+        },
+        {
+          "CaseSensitive": true,
+          "CatalogName": "hive",
+          "Label": "name",
+          "Name": "name",
+          "Nullable": {
+            "Value": "UNKNOWN"
+          },
+          "Precision": 2147483647,
+          "Scale": 0,
+          "SchemaName": "",
+          "TableName": "",
+          "Type": "varchar"
+        },
+        {
+          "CaseSensitive": false,
+          "CatalogName": "hive",
+          "Label": "amount",
+          "Name": "amount",
+          "Nullable": {
+            "Value": "UNKNOWN"
+          },
+          "Precision": 10,
+          "Scale": 0,
+          "SchemaName": "",
+          "TableName": "",
+          "Type": "integer"
+        },
+        {
+          "CaseSensitive": true,
+          "CatalogName": "hive",
+          "Label": "birthday",
+          "Name": "birthday",
+          "Nullable": {
+            "Value": "UNKNOWN"
+          },
+          "Precision": 2147483647,
+          "Scale": 0,
+          "SchemaName": "",
+          "TableName": "",
+          "Type": "varchar"
+        },
+        {
+          "CaseSensitive": false,
+          "CatalogName": "hive",
+          "Label": "families",
+          "Name": "families",
+          "Nullable": {
+            "Value": "UNKNOWN"
+          },
+          "Precision": 0,
+          "Scale": 0,
+          "SchemaName": "",
+          "TableName": "",
+          "Type": "array"
+        },
+        {
+          "CaseSensitive": true,
+          "CatalogName": "hive",
+          "Label": "partition_0",
+          "Name": "partition_0",
+          "Nullable": {
+            "Value": "UNKNOWN"
+          },
+          "Precision": 2147483647,
+          "Scale": 0,
+          "SchemaName": "",
+          "TableName": "",
+          "Type": "varchar"
+        },
+        {
+          "CaseSensitive": true,
+          "CatalogName": "hive",
+          "Label": "partition_1",
+          "Name": "partition_1",
+          "Nullable": {
+            "Value": "UNKNOWN"
+          },
+          "Precision": 2147483647,
+          "Scale": 0,
+          "SchemaName": "",
+          "TableName": "",
+          "Type": "varchar"
+        },
+        {
+          "CaseSensitive": true,
+          "CatalogName": "hive",
+          "Label": "partition_2",
+          "Name": "partition_2",
+          "Nullable": {
+            "Value": "UNKNOWN"
+          },
+          "Precision": 2147483647,
+          "Scale": 0,
+          "SchemaName": "",
+          "TableName": "",
+          "Type": "varchar"
+        }
+      ]
+    },
+    "Rows": [
+      {
+        "Data": [
+          {
+            "VarCharValue": "id"
+          },
+          {
+            "VarCharValue": "name"
+          },
+          {
+            "VarCharValue": "amount"
+          },
+          {
+            "VarCharValue": "birthday"
+          },
+          {
+            "VarCharValue": "families"
+          },
+          {
+            "VarCharValue": "partition_0"
+          },
+          {
+            "VarCharValue": "partition_1"
+          },
+          {
+            "VarCharValue": "partition_2"
+          }
+        ]
+      },
+      {
+        "Data": [
+          {
+            "VarCharValue": "1"
+          },
+          {
+            "VarCharValue": "Sam"
+          },
+          {
+            "VarCharValue": "10"
+          },
+          {
+            "VarCharValue": "1995-07-22T08:00:00"
+          },
+          {
+            "VarCharValue": "[Father, Mom]"
+          },
+          {
+            "VarCharValue": "2022"
+          },
+          {
+            "VarCharValue": "6"
+          },
+          {
+            "VarCharValue": "15"
+          }
+        ]
+      },
+      {
+        "Data": [
+          {
+            "VarCharValue": "2"
+          },
+          {
+            "VarCharValue": "John"
+          },
+          {
+            "VarCharValue": "14000000"
+          },
+          {
+            "VarCharValue": "1964-09-12T08:00:00"
+          },
+          {
+            "VarCharValue": "[Wife, Dog]"
+          },
+          {
+            "VarCharValue": "2022"
+          },
+          {
+            "VarCharValue": "6"
+          },
+          {
+            "VarCharValue": "15"
+          }
+        ]
+      },
+      {
+        "Data": [
+          {
+            "VarCharValue": "3"
+          },
+          {
+            "VarCharValue": "Tom"
+          },
+          {
+            "VarCharValue": "4000000"
+          },
+          {
+            "VarCharValue": "2000-01-01T08:00:00"
+          },
+          {
+            "VarCharValue": "[Brother, Mom]"
+          },
+          {
+            "VarCharValue": "2022"
+          },
+          {
+            "VarCharValue": "6"
+          },
+          {
+            "VarCharValue": "15"
+          }
+        ]
+      }
+    ]
+  },
+  "UpdateCount": 0,
+  "ResponseMetadata": {
+    "RequestId": "30dbbcb5-7429-4c66-9884-4b53f0dff969",
+    "Metadata": {
+    },
+    "ChecksumAlgorithm": 0,
+    "ChecksumValidationStatus": 0
+  },
+  "ContentLength": 2435,
+  "HttpStatusCode": 200
+}

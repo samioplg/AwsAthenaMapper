@@ -1,0 +1,53 @@
+{
+  "QueryExecution": {
+    "EngineVersion": {
+      "EffectiveEngineVersion": "Athena engine version 2",
+      "SelectedEngineVersion": "AUTO"
+    },
+    "ExecutionParameters": [
+    ],
+    "Query": "select * from \"data\".\"data\" order by Id asc",
+    "QueryExecutionContext": {
+      "Catalog": null,
+      "Database": null
+    },
+    "QueryExecutionId": "7a2a5e5b-fc2e-4bcc-a66c-96c8026a91d8",
+    "ResultConfiguration": {
+      "AclConfiguration": null,
+      "EncryptionConfiguration": null,
+      "ExpectedBucketOwner": null,
+      "OutputLocation": "****"
+    },
+    "StatementType": {
+      "Value": "DML"
+    },
+    "Statistics": {
+      "DataManifestLocation": null,
+      "DataScannedInBytes": 293,
+      "EngineExecutionTimeInMillis": 2035,
+      "QueryPlanningTimeInMillis": 0,
+      "QueryQueueTimeInMillis": 114,
+      "ServiceProcessingTimeInMillis": 8,
+      "TotalExecutionTimeInMillis": 2157
+    },
+    "Status": {
+      "AthenaError": null,
+      "CompletionDateTime": "2022-07-07T03:07:27.061Z",
+      "State": {
+        "Value": "SUCCEEDED"
+      },
+      "StateChangeReason": null,
+      "SubmissionDateTime": "2022-07-07T03:07:24.904Z"
+    },
+    "WorkGroup": "primary"
+  },
+  "ResponseMetadata": {
+    "RequestId": "cdb266bb-ca3b-4589-8535-806bb77aff1f",
+    "Metadata": {
+    },
+    "ChecksumAlgorithm": 0,
+    "ChecksumValidationStatus": 0
+  },
+  "ContentLength": 1331,
+  "HttpStatusCode": 200
+}
